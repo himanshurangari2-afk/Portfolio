@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Himanshu Rangari | Civil Engineer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@300;400;500;700&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy-mid:#112240;--navy-lite:#1d3557;--gold:#c9a84c;--gold-lt:#e8c97a;--gold-pale:#f5e9c8;--white:#f0f4f8;--gray:#8899aa;--gray-lt:#ccd6f6;--accent:#4fc3f7;--line:rgba(201,168,76,0.28);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(201,168,76,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.035) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+
+/* EDIT BAR */
+#edit-bar{position:fixed;top:0;left:0;right:0;z-index:999;background:#120800;border-bottom:2px solid var(--gold);padding:7px 20px;display:flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;font-size:11px;flex-wrap:wrap;}
+#edit-bar .eb-label{color:var(--gold);letter-spacing:2px;font-size:10px;white-space:nowrap;}
+#edit-bar button{background:var(--gold);color:#120800;border:none;padding:5px 14px;font-family:'DM Mono',monospace;font-size:10px;font-weight:bold;letter-spacing:1px;cursor:pointer;transition:all .2s;}
+#edit-bar button:hover{background:var(--gold-lt);}
+#edit-bar .btn-ol{background:transparent;color:var(--gold);border:1px solid var(--gold);}
+#edit-bar .btn-ol:hover{background:rgba(201,168,76,0.15);}
+#edit-bar .eb-tip{color:var(--gray);font-size:9px;margin-left:auto;}
+#edit-bar .sv-ok{color:#4caf50;font-size:10px;display:none;}
+#edit-bar .sv-ok.show{display:inline;}
+
+/* EDITABLE */
+[contenteditable="true"]{outline:none;cursor:text;border-radius:2px;transition:background .2s,box-shadow .2s;}
+[contenteditable="true"]:hover{background:rgba(201,168,76,0.07);box-shadow:0 0 0 1px rgba(201,168,76,0.25);}
+[contenteditable="true"]:focus{background:rgba(201,168,76,0.13);box-shadow:0 0 0 2px rgba(201,168,76,0.45);}
+
+/* NAV */
+nav{position:fixed;top:34px;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 50px;background:rgba(10,22,40,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--gray-lt);text-decoration:none;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:150px 50px 80px;z-index:1;}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+.hero-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,6.5vw,90px);line-height:.95;color:var(--white);letter-spacing:2px;opacity:0;animation:fadeUp .8s .4s forwards;}
+.hero-name .ln2{color:var(--gold);}
+.hero-sub{font-size:16px;color:var(--gray);margin-top:22px;line-height:1.7;opacity:0;animation:fadeUp .8s .6s forwards;}
+.hero-sub strong{color:var(--gray-lt);font-weight:500;}
+.hero-btns{display:flex;gap:14px;margin-top:36px;opacity:0;animation:fadeUp .8s .8s forwards;}
+.btn-gold{background:var(--gold);color:var(--navy);padding:12px 28px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);}
+.btn-border{border:1px solid var(--gold);color:var(--gold);padding:12px 28px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .3s;display:inline-block;}
+.btn-border:hover{background:rgba(201,168,76,0.1);transform:translateY(-2px);}
+
+/* PROFILE CARD */
+.hero-card{background:var(--navy-mid);border:1px solid var(--line);padding:32px;position:relative;opacity:0;animation:fadeLeft .8s .6s forwards;}
+.hero-card::before{content:'';position:absolute;top:10px;left:10px;right:-10px;bottom:-10px;border:1px solid rgba(201,168,76,0.12);z-index:-1;}
+.card-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.stat-lbl{font-size:11px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold-lt);}
+.stat-val.sm{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--gray-lt);}
+
+/* SECTIONS */
+section,div.sec-wrap{position:relative;z-index:1;padding:70px 50px;max-width:1100px;margin:0 auto;}
+.sec-hd{display:flex;align-items:center;gap:16px;margin-bottom:44px;}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:var(--white);}
+.sec-line{flex:1;height:1px;background:var(--line);}
+.full-div{width:calc(100% - 100px);height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0 50px;position:relative;z-index:1;}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.sk-card{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.1);padding:24px 20px;transition:all .3s;position:relative;overflow:hidden;}
+.sk-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.sk-card:hover{border-color:rgba(201,168,76,0.38);transform:translateY(-4px);}
+.sk-card:hover::after{transform:scaleX(1);}
+.sk-icon{font-size:26px;margin-bottom:12px;}
+.sk-name{font-size:13px;font-weight:700;color:var(--gray-lt);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.sk-desc{font-size:12px;color:var(--gray);line-height:1.6;}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.tag{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);border:1px solid rgba(201,168,76,0.28);padding:2px 7px;letter-spacing:1px;}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.proj-card{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.1);padding:28px;transition:all .3s;}
+.proj-card.feat{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;}
+.proj-card:hover{border-color:rgba(201,168,76,0.32);transform:translateY(-3px);}
+.proj-badge{font-family:'DM Mono',monospace;font-size:9px;color:var(--navy);background:var(--gold);padding:3px 9px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:14px;}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--white);margin-bottom:10px;line-height:1.1;}
+.proj-desc{font-size:12px;color:var(--gray);line-height:1.7;margin-bottom:16px;}
+.bp-preview{background:#0d1f35;border:1px solid rgba(79,195,247,0.18);padding:16px;display:flex;align-items:center;justify-content:center;min-height:190px;}
+.bp-preview svg{width:100%;max-width:330px;opacity:.85;}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;}
+.exp-item{display:grid;grid-template-columns:185px 1fr;gap:36px;padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.05);position:relative;}
+.exp-item::before{content:'';position:absolute;left:178px;top:0;bottom:0;width:1px;background:var(--line);}
+.exp-item::after{content:'';position:absolute;left:172px;top:44px;width:12px;height:12px;background:var(--gold);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);}
+.exp-period{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:1.5px;padding-top:4px;text-align:right;padding-right:28px;line-height:1.8;}
+.exp-role{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--white);margin-bottom:3px;}
+.exp-co{font-size:12px;color:var(--gold);font-weight:500;letter-spacing:.8px;margin-bottom:14px;}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.exp-bullets li{font-size:12px;color:var(--gray);line-height:1.6;padding-left:14px;position:relative;}
+.exp-bullets li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-size:9px;top:3px;}
+
+/* IRC CODES */
+.codes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.code-card{border:1px solid rgba(201,168,76,0.18);padding:18px 14px;text-align:center;transition:all .3s;background:var(--navy-mid);}
+.code-card:hover{border-color:var(--gold);background:rgba(201,168,76,0.05);}
+.code-nm{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold-lt);font-weight:500;margin-bottom:5px;}
+.code-dc{font-size:10px;color:var(--gray);line-height:1.5;}
+
+/* CONTACT */
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;}
+.c-info{display:flex;flex-direction:column;gap:22px;}
+.c-row{display:flex;align-items:flex-start;gap:14px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.c-icon{width:38px;height:38px;background:rgba(201,168,76,0.09);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.c-lbl{font-size:10px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+.c-val{font-size:14px;color:var(--gray-lt);}
+.avail{display:inline-flex;align-items:center;gap:7px;background:rgba(201,168,76,0.09);border:1px solid var(--gold);padding:7px 18px;margin-top:6px;}
+.avail-dot{width:7px;height:7px;background:#4caf50;border-radius:50%;animation:pulse 2s infinite;}
+.avail-txt{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;}
+
+footer{border-top:1px solid var(--line);padding:24px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:var(--gold);}
+.ft-txt{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- EDIT BAR -->
+<div id="edit-bar" style="display: none;">
+  <span class="eb-label">✏ EDIT MODE</span>
+  <button onclick="saveHTML()">⬇ Download Edited HTML</button>
+  <button class="btn-ol" onclick="window.print()">🖨 Print / PDF</button>
+  <span class="sv-ok" id="sv-ok">✔ Downloaded!</span>
+  <span class="eb-tip">👆 Click any text to edit directly</span>
+</div>
+
+<!-- NAV -->
+<nav style="top: 0px;">
+  <div class="nav-logo">CAD CREATION</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#codes">IRC Codes</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">// Civil Engineer &amp; AutoCAD Specialist</div>
+      <h1 class="hero-name">
+        <span style="color:var(--white);display:block;">HIMANSHU</span>
+        <span class="ln2">RANGARI</span>
+      </h1>
+      <p class="hero-sub">3+ years of civil engineering experience — <strong>AutoCAD 2D drafting</strong>, structural drawings, road design &amp; bridge inspection. Based in Nagpur, open to <strong>Pune</strong>.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-gold">View Projects</a>
+        <a href="#contact" class="btn-border">Hire Me</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-lbl">// Profile Summary</div>
+      <div class="stat-row"><span class="stat-lbl">Experience</span><span class="stat-val">3+ Yrs</span></div>
+      <div class="stat-row"><span class="stat-lbl">Qualification</span><span class="stat-val sm">B.E. Civil Engg.</span></div>
+      <div class="stat-row"><span class="stat-lbl">Primary Tool</span><span class="stat-val sm">AutoCAD 2D</span></div>
+      <div class="stat-row"><span class="stat-lbl">Specialisation</span><span class="stat-val sm">Roads · Structures · Bridges</span></div>
+      <div class="stat-row"><span class="stat-lbl">Standards</span><span class="stat-val sm">IRC · 140</span></div>
+      <div class="stat-row"><span class="stat-lbl">Location</span><span class="stat-val sm">Nagpur → Pune</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="full-div"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-hd reveal visible"><span class="sec-num">01</span><h2 class="sec-title">Technical Skills</h2><div class="sec-line"></div></div>
+  <div class="skills-grid">
+    <div class="sk-card reveal visible"><div class="sk-icon">📐</div><div class="sk-name">AutoCAD 2D Drafting</div><p class="sk-desc">Expert-level 2D drafting — plan, elevation, section views with precise dimensioning and annotation as per IS/IRC standards.</p><div class="tags"><span class="tag">Layers</span><span class="tag">Xref</span><span class="tag">Blocks</span><span class="tag">Hatching</span></div></div>
+    <div class="sk-card reveal visible"><div class="sk-icon">🏗️</div><div class="sk-name">Structural Drawings</div><p class="sk-desc">RCC column, beam, footing, slab drawings with bar bending schedules and reinforcement details as per IS 456:2000.</p><div class="tags"><span class="tag">IS 456</span><span class="tag">BBS</span><span class="tag">RCC Detail</span></div></div>
+    <div class="sk-card reveal visible"><div class="sk-icon">🛣️</div><div class="sk-name">Road &amp; Highway Drawings</div><p class="sk-desc">Plan-profile drawings, cross-sections, carriageway layouts for CC and flexible pavements as per IRC standards.</p><div class="tags"><span class="tag">IRC:58</span><span class="tag">IRC SP:140</span><span class="tag">L-Section</span></div></div>
+    <div class="sk-card reveal visible"><div class="sk-icon">🏠</div><div class="sk-name">Building Floor Plans</div><p class="sk-desc">Residential and commercial building layouts with room planning, door-window schedules, and site plans as per NBC.</p><div class="tags"><span class="tag">NBC</span><span class="tag">Layout</span><span class="tag">Site Plan</span></div></div>
+    <div class="sk-card reveal visible"><div class="sk-icon">🌉</div><div class="sk-name">Bridge Inspection &amp; Drawings</div><p class="sk-desc">Inspection of minor bridges, box culverts, HPC structures. Structural drawings for RCC slab bridges as per IRC:21 &amp; IRC:78.</p><div class="tags"><span class="tag">IRC:21</span><span class="tag">IRC:78</span><span class="tag">Inspection</span></div></div>
+    <div class="sk-card reveal visible"><div class="sk-icon">📊</div><div class="sk-name">Excel Engineering Tools</div><p class="sk-desc">Custom Excel calculation sheets for pavement design, structural checks, BOQ preparation with automated formulas.</p><div class="tags"><span class="tag">BOQ</span><span class="tag">Formulas</span><span class="tag">Design Tools</span></div></div>
+  </div>
+</section>
+
+<div class="full-div"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-hd reveal visible"><span class="sec-num">02</span><h2 class="sec-title">Key Projects</h2><div class="sec-line"></div></div>
+  <div class="proj-grid">
+
+    <!-- Featured: Road -->
+    <div class="proj-card feat reveal visible">
+      <div>
+        <span class="proj-badge">Featured · Road</span>
+        <h3 class="proj-title">MDR-42 CC Road Design<br>Besa–Pipla, Nagpur Gramin</h3>
+        <p class="proj-desc">Complete AutoCAD drawing package for CC rigid pavement covering 4 carriageway widths (3.75m to 7.5m). Plan-profile drawings, cross-sections and design calculations per IRC SP:140-2024 &amp; IRC:58-2015.</p>
+        <div class="tags"><span class="tag">IRC SP:140-2024</span><span class="tag">IRC:58-2015</span><span class="tag">CC Pavement</span><span class="tag">Cross-Sections</span><span class="tag">AutoCAD 2D</span></div>
+      </div>
+      <div class="bp-preview">
+        <!-- Road Cross-Section SVG -->
+        <svg viewBox="0 0 330 210" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="g1" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0L0 0 0 18" fill="none" stroke="rgba(79,195,247,0.1)" stroke-width=".4"></path></pattern></defs>
+          <rect width="330" height="210" fill="#0b1e32"></rect><rect width="330" height="210" fill="url(#g1)"></rect>
+          <line x1="15" y1="152" x2="315" y2="152" stroke="#4fc3f7" stroke-width=".8" stroke-dasharray="4,3"></line>
+          <rect x="55" y="114" width="220" height="38" fill="none" stroke="#c9a84c" stroke-width="1.4"></rect>
+          <rect x="55" y="128" width="220" height="10" fill="rgba(201,168,76,0.07)"></rect>
+          <rect x="44" y="133" width="242" height="19" fill="none" stroke="rgba(79,195,247,0.45)" stroke-width=".9"></rect>
+          <line x1="15" y1="152" x2="55" y2="114" stroke="#c9a84c" stroke-width=".9"></line>
+          <line x1="275" y1="114" x2="315" y2="152" stroke="#c9a84c" stroke-width=".9"></line>
+          <line x1="165" y1="86" x2="165" y2="157" stroke="#ff5252" stroke-width=".9" stroke-dasharray="5,4"></line>
+          <line x1="55" y1="100" x2="275" y2="100" stroke="rgba(201,168,76,0.55)" stroke-width=".7"></line>
+          <line x1="55" y1="95" x2="55" y2="105" stroke="rgba(201,168,76,0.55)" stroke-width=".7"></line>
+          <line x1="275" y1="95" x2="275" y2="105" stroke="rgba(201,168,76,0.55)" stroke-width=".7"></line>
+          <text x="165" y="96" text-anchor="middle" fill="#c9a84c" font-size="8.5" font-family="monospace">7.0 m CARRIAGEWAY</text>
+          <text x="165" y="126" text-anchor="middle" fill="rgba(79,195,247,.85)" font-size="7.5" font-family="monospace">CC PAVEMENT 200mm</text>
+          <text x="165" y="145" text-anchor="middle" fill="rgba(79,195,247,.6)" font-size="7" font-family="monospace">GSB LAYER 150mm</text>
+          <text x="165" y="167" text-anchor="middle" fill="rgba(255,255,255,.35)" font-size="7.5" font-family="monospace">EXISTING GROUND</text>
+          <rect x="8" y="177" width="314" height="26" fill="none" stroke="rgba(201,168,76,.28)" stroke-width=".7"></rect>
+          <text x="165" y="187" text-anchor="middle" fill="#c9a84c" font-size="7.5" font-family="monospace">TYPICAL CROSS SECTION — MDR-42</text>
+          <text x="165" y="198" text-anchor="middle" fill="rgba(255,255,255,.35)" font-size="6.5" font-family="monospace">SCALE: NTS | CAD CREATION, NAGPUR</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Featured: Building Floor Plan -->
+    <div class="proj-card feat reveal visible">
+      <div>
+        <span class="proj-badge">Featured · Architectural</span>
+        <h3 class="proj-title">3BHK Residential<br>Floor Plan — AutoCAD</h3>
+        <p class="proj-desc">Complete 3BHK residential floor plan with room layout, door-window schedule, staircase, and site dimensions prepared in AutoCAD 2D as per NBC 2016 guidelines.</p>
+        <div class="tags"><span class="tag">NBC 2016</span><span class="tag">Floor Plan</span><span class="tag">AutoCAD 2D</span><span class="tag">3BHK</span><span class="tag">D/W Schedule</span></div>
+      </div>
+      <div class="bp-preview">
+        <!-- 3BHK Floor Plan SVG -->
+        <svg viewBox="0 0 330 210" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="g2" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M14 0L0 0 0 14" fill="none" stroke="rgba(79,195,247,0.08)" stroke-width=".4"></path></pattern></defs>
+          <rect width="330" height="210" fill="#0b1e32"></rect><rect width="330" height="210" fill="url(#g2)"></rect>
+          <!-- Outer walls -->
+          <rect x="18" y="18" width="294" height="174" fill="none" stroke="#c9a84c" stroke-width="2.5"></rect>
+          <!-- Inner walls -->
+          <!-- Vertical dividers -->
+          <line x1="128" y1="18" x2="128" y2="120" stroke="#4fc3f7" stroke-width="1.4"></line>
+          <line x1="220" y1="18" x2="220" y2="120" stroke="#4fc3f7" stroke-width="1.4"></line>
+          <line x1="128" y1="120" x2="128" y2="192" stroke="#4fc3f7" stroke-width="1.4"></line>
+          <!-- Horizontal dividers -->
+          <line x1="18" y1="120" x2="312" y2="120" stroke="#4fc3f7" stroke-width="1.4"></line>
+          <line x1="220" y1="70" x2="312" y2="70" stroke="#4fc3f7" stroke-width="1.2"></line>
+          <!-- Door openings (gaps) -->
+          <line x1="128" y1="62" x2="128" y2="78" stroke="#0b1e32" stroke-width="3"></line>
+          <line x1="220" y1="95" x2="220" y2="108" stroke="#0b1e32" stroke-width="3"></line>
+          <line x1="128" y1="148" x2="128" y2="162" stroke="#0b1e32" stroke-width="3"></line>
+          <line x1="175" y1="120" x2="190" y2="120" stroke="#0b1e32" stroke-width="3"></line>
+          <line x1="255" y1="120" x2="270" y2="120" stroke="#0b1e32" stroke-width="3"></line>
+          <!-- Door arcs -->
+          <path d="M128 62 Q142 62 142 78" fill="none" stroke="rgba(201,168,76,.5)" stroke-width=".8" stroke-dasharray="2,2"></path>
+          <path d="M220 95 Q220 108 207 108" fill="none" stroke="rgba(201,168,76,.5)" stroke-width=".8" stroke-dasharray="2,2"></path>
+          <path d="M175 120 Q175 134 190 134" fill="none" stroke="rgba(201,168,76,.5)" stroke-width=".8" stroke-dasharray="2,2"></path>
+          <!-- Windows on outer wall -->
+          <line x1="50" y1="18" x2="78" y2="18" stroke="#4fc3f7" stroke-width="2.5"></line>
+          <line x1="155" y1="18" x2="195" y2="18" stroke="#4fc3f7" stroke-width="2.5"></line>
+          <line x1="240" y1="18" x2="280" y2="18" stroke="#4fc3f7" stroke-width="2.5"></line>
+          <line x1="18" y1="50" x2="18" y2="90" stroke="#4fc3f7" stroke-width="2.5"></line>
+          <line x1="312" y1="40" x2="312" y2="65" stroke="#4fc3f7" stroke-width="2.5"></line>
+          <!-- Staircase box -->
+          <rect x="228" y="122" width="48" height="36" fill="none" stroke="rgba(201,168,76,.4)" stroke-width=".8"></rect>
+          <line x1="228" y1="128" x2="276" y2="128" stroke="rgba(201,168,76,.3)" stroke-width=".5"></line>
+          <line x1="228" y1="134" x2="276" y2="134" stroke="rgba(201,168,76,.3)" stroke-width=".5"></line>
+          <line x1="228" y1="140" x2="276" y2="140" stroke="rgba(201,168,76,.3)" stroke-width=".5"></line>
+          <line x1="228" y1="146" x2="276" y2="146" stroke="rgba(201,168,76,.3)" stroke-width=".5"></line>
+          <line x1="228" y1="152" x2="276" y2="152" stroke="rgba(201,168,76,.3)" stroke-width=".5"></line>
+          <!-- Sanitary (bathroom fixtures hint) -->
+          <rect x="230" y="72" width="22" height="14" rx="3" fill="none" stroke="rgba(79,195,247,.4)" stroke-width=".7"></rect>
+          <ellipse cx="299" cy="47" rx="10" ry="7" fill="none" stroke="rgba(79,195,247,.4)" stroke-width=".7"></ellipse>
+          <!-- Room labels -->
+          <text x="70" y="76" text-anchor="middle" fill="#c9a84c" font-size="8" font-family="monospace">MASTER BED</text>
+          <text x="70" y="86" text-anchor="middle" fill="rgba(79,195,247,.7)" font-size="6.5" font-family="monospace">4.2 × 3.6 m</text>
+          <text x="172" y="68" text-anchor="middle" fill="#c9a84c" font-size="7.5" font-family="monospace">BED ROOM 2</text>
+          <text x="172" y="78" text-anchor="middle" fill="rgba(79,195,247,.7)" font-size="6.5" font-family="monospace">3.6 × 3.0 m</text>
+          <text x="264" y="48" text-anchor="middle" fill="#c9a84c" font-size="7.5" font-family="monospace">BED RM 3</text>
+          <text x="264" y="58" text-anchor="middle" fill="rgba(79,195,247,.7)" font-size="6" font-family="monospace">3.0×2.8m</text>
+          <text x="264" y="98" text-anchor="middle" fill="#c9a84c" font-size="7.5" font-family="monospace">TOILET</text>
+          <text x="70" y="158" text-anchor="middle" fill="#c9a84c" font-size="8" font-family="monospace">LIVING ROOM</text>
+          <text x="70" y="168" text-anchor="middle" fill="rgba(79,195,247,.7)" font-size="6.5" font-family="monospace">5.0 × 4.0 m</text>
+          <text x="185" y="158" text-anchor="middle" fill="#c9a84c" font-size="7.5" font-family="monospace">KITCHEN</text>
+          <text x="185" y="168" text-anchor="middle" fill="rgba(79,195,247,.7)" font-size="6.5" font-family="monospace">3.0 × 3.0 m</text>
+          <text x="252" y="168" text-anchor="middle" fill="#c9a84c" font-size="7.5" font-family="monospace">STAIR</text>
+          <!-- North arrow -->
+          <circle cx="30" cy="195" r="7" fill="none" stroke="rgba(201,168,76,.5)" stroke-width=".8"></circle>
+          <polygon points="30,188 27,197 30,195 33,197" fill="#c9a84c"></polygon>
+          <text x="30" y="205" text-anchor="middle" fill="rgba(201,168,76,.7)" font-size="6" font-family="monospace">N</text>
+          <!-- Title block -->
+          <text x="165" y="205" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="6" font-family="monospace">3BHK FLOOR PLAN | SCALE 1:100 | CAD CREATION, NAGPUR</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="proj-card reveal visible"><span class="proj-badge">Bridge</span><h3 class="proj-title">RCC Slab Bridge<br>6.0m Simply Supported</h3><p class="proj-desc">Full structural drawing set — plan, elevation, cross-section, reinforcement details. Designed per IRC:21 &amp; IRC:78 with pitching area calculations as per IRC:5 &amp; IRC:78 Clause 706.</p><div class="tags"><span class="tag">IRC:21</span><span class="tag">IRC:78</span><span class="tag">RCC Slab</span><span class="tag">Reinforcement</span></div></div>
+
+    <div class="proj-card reveal visible"><span class="proj-badge">Structural</span><h3 class="proj-title">RCC Column &amp; Beam<br>Design Suite</h3><p class="proj-desc">AutoCAD structural layout drawings + Excel IS 456:2000 workbook — 7 linked sheets covering column, beam, BOQ, and bar bending schedule.</p><div class="tags"><span class="tag">IS 456:2000</span><span class="tag">Column</span><span class="tag">Beam</span><span class="tag">BOQ + BBS</span></div></div>
+
+    <div class="proj-card reveal visible"><span class="proj-badge">Architectural</span><h3 class="proj-title">Staircase Design<br>Dog-leg &amp; L-Shape</h3><p class="proj-desc">AutoCAD detail drawings for dog-leg, L-shape, and straight staircases with NBC-compliant riser/tread calculations.</p><div class="tags"><span class="tag">NBC</span><span class="tag">Dog-leg</span><span class="tag">L-Shape</span><span class="tag">Riser/Tread</span></div></div>
+
+    <div class="proj-card reveal visible"><span class="proj-badge">Road · Excel</span><h3 class="proj-title">SSCP Design Tool<br>IRC SP:140-2024</h3><p class="proj-desc">Interactive Excel design tool for Short Slab Concrete Pavement with yellow input / green formula cells and automatic SAFE/UNSAFE verdict system.</p><div class="tags"><span class="tag">IRC SP:140</span><span class="tag">Excel Tool</span><span class="tag">Auto Verdict</span></div></div>
+
+  </div>
+</section>
+
+<div class="full-div"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-hd reveal visible"><span class="sec-num">03</span><h2 class="sec-title">Work Experience</h2><div class="sec-line"></div></div>
+  <div class="exp-list">
+
+    <!-- EXP 1 -->
+    <div class="exp-item reveal visible">
+      <div class="exp-period">Feb 2024<br>— Present</div>
+      <div>
+        <div class="exp-role">Civil Engineer</div>
+        <div class="exp-co">N. M. Patale Consulting Engineer · Nagpur, Maharashtra</div>
+        <ul class="exp-bullets">
+          <li>Prepared AutoCAD 2D drawings for road &amp; highway projects — plan, profile, cross-sections per IRC standards</li>
+          <li>Drafted structural drawings for RCC columns, beams, footings &amp; slabs as per IS 456:2000</li>
+          <li>Prepared BOQ and drawing annotations with precise dimensioning for project deliverables</li>
+          <li>Coordinated with site engineers to update drawings based on field conditions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 2 -->
+    <div class="exp-item reveal visible">
+      <div class="exp-period">Feb 2023<br>— Jan 2024</div>
+      <div>
+        <div class="exp-role">Junior Engineer</div>
+        <div class="exp-co">Yog Kamal Construction · Buldhana, Maharashtra</div>
+        <ul class="exp-bullets">
+          <li>Inspection of bridges including Minor Bridge, Box Culvert and HPC structures</li>
+          <li>Provided expert advice and guidance to clients on engineering solutions and project strategies</li>
+          <li>Supported structural detail drawings for bridges and culverts</li>
+          <li>Developed Excel-based engineering calculation tools for pavement and structural design</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 3 -->
+    <div class="exp-item reveal visible">
+      <div class="exp-period">Jan 2022<br>— Jan 2023</div>
+      <div>
+        <div class="exp-role">Junior Engineer</div>
+        <div class="exp-co">Harshita Construction · Yavatmal, Maharashtra</div>
+        <ul class="exp-bullets">
+          <li>Planning &amp; Coordination: Prepared erection sequence, lifting plan, and safety measures in line with project specifications</li>
+          <li>Structural Assembly: Supervised placement of girders using cranes, ensuring alignment and stability</li>
+          <li>Survey &amp; Accuracy: Conducted leveling, alignment, and bolting checks to meet design tolerances</li>
+          <li>Quality Assurance: Verified material specifications, connections, and load-bearing capacity before final approval</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 4 -->
+    <div class="exp-item reveal visible">
+      <div class="exp-period">Apr 2021<br>— Jan 2022</div>
+      <div>
+        <div class="exp-role">Site Engineer</div>
+        <div class="exp-co">Khaltkar Construction Company · Nagpur, Maharashtra</div>
+        <ul class="exp-bullets">
+          <li>Foundation Engineering: Managed excavation in varied soil conditions including dewatering and soil stabilization</li>
+          <li>Structural Detailing: Oversaw reinforcement cage assembly and precision shuttering for culvert boxes</li>
+          <li>Concrete Technology: Implemented high-quality mix design, curing methods and compaction for durability</li>
+          <li>Problem-Solving: Resolved site challenges such as uneven ground levels, waterlogging, and alignment issues</li>
+          <li>Project Delivery: Achieved timely execution while balancing safety, quality, and cost efficiency</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-div"></div>
+
+<!-- IRC CODES -->
+<section id="codes">
+  <div class="sec-hd reveal visible"><span class="sec-num">04</span><h2 class="sec-title">IRC / IS Code Knowledge</h2><div class="sec-line"></div></div>
+  <div class="codes-grid reveal visible">
+    <div class="code-card"><div class="code-nm">IRC:5</div><div class="code-dc">Standard Specifications for Road Bridges — General</div></div>
+    <div class="code-card"><div class="code-nm">IRC:6</div><div class="code-dc">Loads &amp; Load Combinations for Road Bridges</div></div>
+    <div class="code-card"><div class="code-nm">IRC:21</div><div class="code-dc">RCC Road Bridge Sections &amp; Design</div></div>
+    <div class="code-card"><div class="code-nm">IRC:58</div><div class="code-dc">Design of Plain Jointed Rigid Pavements</div></div>
+    <div class="code-card"><div class="code-nm">IRC:78</div><div class="code-dc">Foundations &amp; Substructure for Road Bridges</div></div>
+    <div class="code-card"><div class="code-nm">IRC:112</div><div class="code-dc">Concrete Road Bridges — Limit State Design</div></div>
+    <div class="code-card"><div class="code-nm">IRC SP:140</div><div class="code-dc">Short Slab Concrete Pavement Design</div></div>
+    <div class="code-card"><div class="code-nm">IS 456:2000</div><div class="code-dc">Plain &amp; Reinforced Concrete — Code of Practice</div></div>
+    <div class="code-card"><div class="code-nm">IRC SP:13</div><div class="code-dc">Guidelines for Small Bridges &amp; Culverts</div></div>
+    <div class="code-card"><div class="code-nm">IRC SP:114</div><div class="code-dc">Seismic Design of Road Bridges</div></div>
+    <div class="code-card"><div class="code-nm">IRC:15-2017</div><div class="code-dc">Standard Specs for Construction of CC Roads</div></div>
+    <div class="code-card"><div class="code-nm">NBC 2016</div><div class="code-dc">National Building Code — Architectural Standards</div></div>
+  </div>
+</section>
+
+<div class="full-div"></div>
+
+<!-- CONTACT -->
+<div class="sec-wrap" id="contact">
+  <div class="sec-hd reveal visible"><span class="sec-num">05</span><h2 class="sec-title">Get In Touch</h2><div class="sec-line"></div></div>
+  <div class="contact-inner">
+    <div class="c-info reveal visible">
+      <div class="c-row"><div class="c-icon">📞</div><div><div class="c-lbl">Phone</div><div class="c-val">+91-9860104105</div></div></div>
+      <div class="c-row"><div class="c-icon">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">himanshurangari2@email.com</div></div></div>
+      <div class="c-row"><div class="c-icon">📍</div><div><div class="c-lbl">Base Location</div><div class="c-val">Nagpur, Maharashtra</div></div></div>
+      <div class="c-row"><div class="c-icon">🎯</div><div><div class="c-lbl">Open To</div><div class="c-val">Pune, Maharashtra · Remote Freelance</div></div></div>
+      <div><div class="avail"><div class="avail-dot"></div><span class="avail-txt">Available for Immediate Joining</span></div></div>
+    </div>
+    <div class="reveal visible" style="padding-top:6px;">
+      <p style="font-size:13px;color:var(--gray);line-height:1.8;margin-bottom:22px;">Looking for a dedicated Civil Engineer with hands-on experience in AutoCAD drafting, structural drawings, road design, bridge inspection, and site execution? Let's connect — available for full-time roles in Pune or remote freelance projects across India.</p>
+      <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:14px;">SPECIALISATIONS</p>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;">
+        <span class="tag">Structural Drawings</span><span class="tag">Road Design</span><span class="tag">Bridge Drafting</span><span class="tag">Floor Plans</span><span class="tag">AutoCAD 2D</span><span class="tag">Excel Tools</span><span class="tag">IRC Codes</span><span class="tag">Site Execution</span><span class="tag">BOQ Preparation</span>
+      </div>
+      <a href="#" class="btn-gold" id="email-btn">Send Message</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-logo">CAD CREATION</div>
+  <div class="ft-txt">Himanshu Rangari · Civil Engineer · Nagpur, Maharashtra</div>
+  <div class="ft-txt">© 2025 · All Rights Reserved</div>
+</footer>
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*70);obs.unobserve(e.target);}});},{threshold:.08});
+reveals.forEach(el=>obs.observe(el));
+
+function saveHTML(){
+  const bar=document.getElementById('edit-bar');
+  bar.style.display='none';
+  const nav=document.querySelector('nav');
+  nav.style.top='0';
+  const eds=document.querySelectorAll('[contenteditable]');
+  eds.forEach(e=>e.removeAttribute('contenteditable'));
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Himanshu_Rangari_Portfolio.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  bar.style.display='flex';
+  nav.style.top='34px';
+  eds.forEach(e=>e.setAttribute('contenteditable','true'));
+  const ok=document.getElementById('sv-ok');
+  ok.classList.add('show');
+  setTimeout(()=>ok.classList.remove('show'),2500);
+}
+</script>
+
+
+</body></html>
